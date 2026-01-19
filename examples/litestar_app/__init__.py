@@ -39,6 +39,7 @@ Items:
     - PATCH /items/{id} - Update item
     - DELETE /items/{id} - Delete item
     - POST /items/{id}/reserve - Reserve item quantity
+
 """
 
 from __future__ import annotations
@@ -62,8 +63,6 @@ from .models import (
 )
 
 __all__ = [
-    "app",
-    "create_app",
     "ErrorResponse",
     "HealthResponse",
     "ItemCreate",
@@ -75,4 +74,6 @@ __all__ = [
     "UserResponse",
     "UserRole",
     "UserUpdate",
+    "app",
+    "create_app",
 ]

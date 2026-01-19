@@ -6,7 +6,7 @@ Provides CRUD operations for inventory item resources.
 from __future__ import annotations
 
 from datetime import datetime, timezone
-from typing import Annotated
+from typing import Annotated, ClassVar
 
 from litestar import Controller, delete, get, patch, post
 from litestar.exceptions import NotFoundException
@@ -34,10 +34,11 @@ class ItemController(Controller):
     Attributes:
         path: Base path for all item endpoints.
         tags: OpenAPI tags for documentation grouping.
+
     """
 
     path = "/items"
-    tags = ["Items"]
+    tags: ClassVar[list[str]] = ["Items"]
 
     @get("/")
     async def list_items(
@@ -80,6 +81,7 @@ class ItemController(Controller):
             >>> data = response.json()
             >>> all(item["status"] == "available" for item in data["items"])
             True
+
         """
         items = list(_items_db.values())
 
@@ -129,9 +131,11 @@ class ItemController(Controller):
             >>> response = await client.get("/items/1")
             >>> response.json()["name"]
             "Widget Pro"
+
         """
         if item_id not in _items_db:
-            raise NotFoundException(f"Item with ID {item_id} not found")
+            msg = f"Item with ID {item_id} not found"
+            raise NotFoundException(msg)
         return ItemResponse(**_items_db[item_id])
 
     @post("/")
@@ -156,6 +160,7 @@ class ItemController(Controller):
             >>> response = await client.post("/items", json=payload)
             >>> response.status_code
             201
+
         """
         global _item_counter
         _item_counter += 1
@@ -197,9 +202,11 @@ class ItemController(Controller):
             >>> response = await client.patch("/items/1", json=payload)
             >>> response.json()["price"]
             3499
+
         """
         if item_id not in _items_db:
-            raise NotFoundException(f"Item with ID {item_id} not found")
+            msg = f"Item with ID {item_id} not found"
+            raise NotFoundException(msg)
 
         item = _items_db[item_id]
         update_data = data.model_dump(exclude_unset=True)
@@ -234,9 +241,11 @@ class ItemController(Controller):
             >>> response = await client.delete("/items/1")
             >>> response.status_code
             204
+
         """
         if item_id not in _items_db:
-            raise NotFoundException(f"Item with ID {item_id} not found")
+            msg = f"Item with ID {item_id} not found"
+            raise NotFoundException(msg)
         del _items_db[item_id]
 
     @post("/{item_id:int}/reserve")
@@ -268,13 +277,16 @@ class ItemController(Controller):
             >>> response = await client.post("/items/1/reserve?quantity=5")
             >>> response.json()["status"]
             "reserved"
+
         """
         if item_id not in _items_db:
-            raise NotFoundException(f"Item with ID {item_id} not found")
+            msg = f"Item with ID {item_id} not found"
+            raise NotFoundException(msg)
 
         item = _items_db[item_id]
         if item["quantity"] < quantity:
-            raise ValueError(f"Insufficient quantity. Available: {item['quantity']}")
+            msg = f"Insufficient quantity. Available: {item['quantity']}"
+            raise ValueError(msg)
 
         item["quantity"] -= quantity
         item["status"] = ItemStatus.RESERVED.value if item["quantity"] == 0 else item["status"]

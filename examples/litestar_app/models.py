@@ -22,6 +22,7 @@ class UserRole(str, Enum):
         ADMIN: Administrator with full access.
         USER: Standard user with limited access.
         GUEST: Guest user with read-only access.
+
     """
 
     ADMIN = "admin"
@@ -39,6 +40,7 @@ class ItemStatus(str, Enum):
         RESERVED: Item has been reserved.
         SOLD: Item has been sold.
         DISCONTINUED: Item is no longer available.
+
     """
 
     AVAILABLE = "available"
@@ -58,6 +60,7 @@ class UserBase(BaseModel):
         username: The user's unique username.
         full_name: The user's full display name.
         role: The user's assigned role.
+
     """
 
     email: EmailStr
@@ -73,6 +76,7 @@ class UserCreate(UserBase):
 
     Attributes:
         password: The user's password (min 8 characters).
+
     """
 
     password: Annotated[str, Field(min_length=8)]
@@ -87,6 +91,7 @@ class UserResponse(UserBase):
         id: Unique identifier for the user.
         created_at: Timestamp when the user was created.
         is_active: Whether the user account is active.
+
     """
 
     id: int
@@ -109,6 +114,7 @@ class UserUpdate(BaseModel):
         full_name: New display name.
         role: New user role.
         is_active: New active status.
+
     """
 
     email: EmailStr | None = None
@@ -128,6 +134,7 @@ class ItemBase(BaseModel):
         price: The item's price in cents.
         quantity: Number of items in stock.
         status: Current availability status.
+
     """
 
     name: Annotated[str, Field(min_length=1, max_length=200)]
@@ -143,7 +150,6 @@ class ItemCreate(ItemBase):
     Uses all fields from ItemBase.
     """
 
-    pass
 
 
 class ItemResponse(ItemBase):
@@ -155,6 +161,7 @@ class ItemResponse(ItemBase):
         id: Unique identifier for the item.
         created_at: Timestamp when the item was created.
         updated_at: Timestamp of the last update.
+
     """
 
     id: int
@@ -178,6 +185,7 @@ class ItemUpdate(BaseModel):
         price: New price in cents.
         quantity: New stock quantity.
         status: New availability status.
+
     """
 
     name: Annotated[str, Field(min_length=1, max_length=200)] | None = None
@@ -198,6 +206,7 @@ class HealthResponse(BaseModel):
         timestamp: Current server timestamp.
         database: Database connection status.
         cache: Cache connection status.
+
     """
 
     status: str
@@ -218,6 +227,7 @@ class PaginatedResponse(BaseModel):
         page: Current page number (1-indexed).
         page_size: Number of items per page.
         total_pages: Total number of pages.
+
     """
 
     items: list
@@ -236,6 +246,7 @@ class ErrorResponse(BaseModel):
         error: Error type or code.
         message: Human-readable error message.
         details: Additional error details.
+
     """
 
     error: str

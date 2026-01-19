@@ -6,7 +6,7 @@ Typesense is not available at localhost:8108.
 
 Requirements:
     - Typesense server running at localhost:8108
-    - API key: xyz (default development key)
+    - API key: local_dev_key (default development key)
 
 Run integration tests::
 
@@ -50,8 +50,8 @@ def _typesense_available() -> bool:
     try:
         client = TypesenseClient(
             {
-                "nodes": [{"host": "localhost", "port": "8108", "protocol": "http"}],
-                "api_key": "xyz",
+                "nodes": [{"host": "127.0.0.1", "port": "8108", "protocol": "http"}],
+                "api_key": "local_dev_key",
                 "connection_timeout_seconds": 2,
             }
         )
@@ -82,8 +82,8 @@ def typesense_client() -> Generator[TypesenseClient, None, None]:
     """
     return TypesenseClient(
         {
-            "nodes": [{"host": "localhost", "port": "8108", "protocol": "http"}],
-            "api_key": "xyz",
+            "nodes": [{"host": "127.0.0.1", "port": "8108", "protocol": "http"}],
+            "api_key": "local_dev_key",
             "connection_timeout_seconds": 10,
         }
     )
@@ -149,11 +149,11 @@ def integration_sphinx_app(test_collection_name: str, tmp_path: Path) -> MagicMo
     app = MagicMock(spec=["config", "outdir", "srcdir", "builder", "env"])
 
     app.config = MagicMock()
-    app.config.typesense_host = "localhost"
+    app.config.typesense_host = "127.0.0.1"
     app.config.typesense_port = "8108"
     app.config.typesense_protocol = "http"
-    app.config.typesense_api_key = "xyz"
-    app.config.typesense_search_api_key = "xyz"
+    app.config.typesense_api_key = "local_dev_key"
+    app.config.typesense_search_api_key = "local_dev_key"
     app.config.typesense_collection_name = test_collection_name
     app.config.typesense_doc_version = ""
     app.config.typesense_placeholder = "Search documentation..."
@@ -776,7 +776,7 @@ class TestErrorHandling:
         """Verify handling of invalid API key."""
         client = TypesenseClient(
             {
-                "nodes": [{"host": "localhost", "port": "8108", "protocol": "http"}],
+                "nodes": [{"host": "127.0.0.1", "port": "8108", "protocol": "http"}],
                 "api_key": "invalid_key_12345",
                 "connection_timeout_seconds": 2,
             }
@@ -813,7 +813,7 @@ class TestServerUnavailable:
         client = TypesenseClient(
             {
                 "nodes": [{"host": "localhost", "port": "19999", "protocol": "http"}],
-                "api_key": "xyz",
+                "api_key": "local_dev_key",
                 "connection_timeout_seconds": 1,
             }
         )

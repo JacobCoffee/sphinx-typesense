@@ -6,6 +6,7 @@ Provides endpoints for monitoring API health and status.
 from __future__ import annotations
 
 from datetime import datetime, timezone
+from typing import ClassVar
 
 from litestar import Controller, get
 
@@ -21,10 +22,11 @@ class HealthController(Controller):
     Attributes:
         path: Base path for all health endpoints.
         tags: OpenAPI tags for documentation grouping.
+
     """
 
     path = "/health"
-    tags = ["Health"]
+    tags: ClassVar[list[str]] = ["Health"]
 
     @get("/")
     async def health_check(self) -> HealthResponse:
@@ -40,6 +42,7 @@ class HealthController(Controller):
             >>> response = await client.get("/health")
             >>> response.json()
             {"status": "healthy", "version": "1.0.0", ...}
+
         """
         return HealthResponse(
             status="healthy",
@@ -58,6 +61,7 @@ class HealthController(Controller):
 
         Returns:
             dict: Readiness status.
+
         """
         return {"status": "ready"}
 
@@ -70,5 +74,6 @@ class HealthController(Controller):
 
         Returns:
             dict: Liveness status.
+
         """
         return {"status": "alive"}

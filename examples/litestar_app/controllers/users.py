@@ -6,7 +6,7 @@ Provides CRUD operations for user resources.
 from __future__ import annotations
 
 from datetime import datetime, timezone
-from typing import Annotated
+from typing import Annotated, ClassVar
 
 from litestar import Controller, delete, get, patch, post
 from litestar.exceptions import NotFoundException
@@ -34,10 +34,11 @@ class UserController(Controller):
     Attributes:
         path: Base path for all user endpoints.
         tags: OpenAPI tags for documentation grouping.
+
     """
 
     path = "/users"
-    tags = ["Users"]
+    tags: ClassVar[list[str]] = ["Users"]
 
     @get("/")
     async def list_users(
@@ -72,6 +73,7 @@ class UserController(Controller):
             >>> data = response.json()
             >>> len(data["items"])
             10
+
         """
         users = list(_users_db.values())
 
@@ -114,9 +116,11 @@ class UserController(Controller):
             >>> response = await client.get("/users/1")
             >>> response.json()["username"]
             "johndoe"
+
         """
         if user_id not in _users_db:
-            raise NotFoundException(f"User with ID {user_id} not found")
+            msg = f"User with ID {user_id} not found"
+            raise NotFoundException(msg)
         return UserResponse(**_users_db[user_id])
 
     @post("/")
@@ -143,6 +147,7 @@ class UserController(Controller):
             >>> response = await client.post("/users", json=payload)
             >>> response.status_code
             201
+
         """
         global _user_counter
         _user_counter += 1
@@ -182,9 +187,11 @@ class UserController(Controller):
             >>> response = await client.patch("/users/1", json=payload)
             >>> response.json()["full_name"]
             "John Doe Jr."
+
         """
         if user_id not in _users_db:
-            raise NotFoundException(f"User with ID {user_id} not found")
+            msg = f"User with ID {user_id} not found"
+            raise NotFoundException(msg)
 
         user = _users_db[user_id]
         update_data = data.model_dump(exclude_unset=True)
@@ -218,7 +225,9 @@ class UserController(Controller):
             >>> response = await client.delete("/users/1")
             >>> response.status_code
             204
+
         """
         if user_id not in _users_db:
-            raise NotFoundException(f"User with ID {user_id} not found")
+            msg = f"User with ID {user_id} not found"
+            raise NotFoundException(msg)
         del _users_db[user_id]

@@ -26,6 +26,7 @@ def create_app() -> Litestar:
         >>> app = create_app()
         >>> # Use with ASGI server
         >>> # uvicorn examples.litestar_app.app:create_app --factory
+
     """
     return Litestar(
         route_handlers=[

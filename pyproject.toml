@@ -115,6 +115,16 @@ ignore = [
     "INP001",  # implicit namespace package (standard for Sphinx conf.py)
     "A001",    # builtin shadowing (copyright is standard Sphinx variable)
 ]
+"examples/docs/**/conf.py" = [
+    "INP001",  # implicit namespace package (standard for Sphinx conf.py)
+    "A001",    # builtin shadowing (copyright is standard Sphinx variable)
+]
+"examples/litestar_app/**/*" = [
+    "TID252",  # relative imports are fine for example app
+    "PLW0603", # global statement acceptable in demo code
+    "TC003",   # pydantic needs runtime access to datetime
+    "SIM108",  # ternary less readable for complex conditionals
+]
 
 [tool.ruff.lint.isort]
 known-first-party = ["sphinx_typesense"]
