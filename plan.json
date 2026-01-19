@@ -1,0 +1,1183 @@
+{
+  "meta": {
+    "project": "sphinx-typesense",
+    "version": "0.1.0",
+    "created_at": "2026-01-19T02:30:00Z",
+    "updated_at": "2026-01-19T20:00:00Z",
+    "business_plan_path": "SPECIFICATION.md"
+  },
+  "summary": {
+    "total_phases": 6,
+    "total_tasks": 56,
+    "completed_tasks": 56,
+    "in_progress_tasks": 0,
+    "blocked_tasks": 0,
+    "overall_progress": 100
+  },
+  "phases": [
+    {
+      "id": "1",
+      "name": "Project Scaffolding",
+      "description": "Set up project structure following JacobCoffee library patterns (uv_build, prek, shibuya theme)",
+      "status": "completed",
+      "progress": {
+        "completed": 12,
+        "total": 12,
+        "percentage": 100
+      },
+      "tasks": [
+        {
+          "id": "1.1.1",
+          "title": "Create pyproject.toml with uv_build backend and dependency-groups (docs, lint, test, dev)",
+          "status": "completed",
+          "agent_type": "python-backend-engineer",
+          "business_plan_ref": {
+            "section": "Dependencies",
+            "lines": [709, 729],
+            "key_content": "pyproject.toml with sphinx>=7.0.0, typesense>=0.21.0, beautifulsoup4>=4.12.0"
+          },
+          "depends_on": [],
+          "tracking": {
+            "started_at": null,
+            "completed_at": "2026-01-19T17:55:00Z",
+            "time_spent_minutes": null,
+            "notes": null,
+            "attempts": 0,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "1.1.2",
+          "title": "Create Makefile with standard targets (install, dev, lint, fmt, test, docs, build, clean)",
+          "status": "completed",
+          "agent_type": "python-backend-engineer",
+          "depends_on": ["1.1.1"],
+          "tracking": {
+            "started_at": null,
+            "completed_at": "2026-01-19T17:55:00Z",
+            "time_spent_minutes": null,
+            "notes": null,
+            "attempts": 0,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "1.1.3",
+          "title": "Create .pre-commit-config.yaml with prek hooks (ruff, codespell, ty, sphinx-lint)",
+          "status": "completed",
+          "agent_type": "python-backend-engineer",
+          "depends_on": ["1.1.1"],
+          "tracking": {
+            "started_at": null,
+            "completed_at": "2026-01-19T17:55:00Z",
+            "time_spent_minutes": null,
+            "notes": null,
+            "attempts": 0,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "1.1.4",
+          "title": "Create .gitignore following library pattern",
+          "status": "completed",
+          "agent_type": "python-backend-engineer",
+          "depends_on": [],
+          "tracking": {
+            "started_at": null,
+            "completed_at": "2026-01-19T17:55:00Z",
+            "time_spent_minutes": null,
+            "notes": null,
+            "attempts": 0,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "1.1.5",
+          "title": "Create .github/workflows/ci.yml (security, validate, test-smoke, test-full, ci-success)",
+          "status": "completed",
+          "agent_type": "github-git-expert",
+          "depends_on": ["1.1.1"],
+          "tracking": {
+            "started_at": null,
+            "completed_at": "2026-01-19T17:55:00Z",
+            "time_spent_minutes": null,
+            "notes": null,
+            "attempts": 0,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "1.1.6",
+          "title": "Create .github/workflows/docs.yml (build, deploy to GitHub Pages)",
+          "status": "completed",
+          "agent_type": "github-git-expert",
+          "depends_on": ["1.1.5"],
+          "tracking": {
+            "started_at": null,
+            "completed_at": "2026-01-19T17:55:00Z",
+            "time_spent_minutes": null,
+            "notes": null,
+            "attempts": 0,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "1.1.7",
+          "title": "Create .github/workflows/publish.yml (build, sign with sigstore, PyPI publish)",
+          "status": "completed",
+          "agent_type": "github-git-expert",
+          "depends_on": ["1.1.5"],
+          "tracking": {
+            "started_at": null,
+            "completed_at": "2026-01-19T17:55:00Z",
+            "time_spent_minutes": null,
+            "notes": null,
+            "attempts": 0,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "1.1.8",
+          "title": "Create .github/ISSUE_TEMPLATE/ (BUG.yml, FEATURE.yml, DOCS.yml, config.yml)",
+          "status": "completed",
+          "agent_type": "github-git-expert",
+          "depends_on": [],
+          "tracking": {
+            "started_at": null,
+            "completed_at": "2026-01-19T17:55:00Z",
+            "time_spent_minutes": null,
+            "notes": null,
+            "attempts": 0,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "1.1.9",
+          "title": "Create .github/dependabot.yml and release.yml",
+          "status": "completed",
+          "agent_type": "github-git-expert",
+          "depends_on": [],
+          "tracking": {
+            "started_at": null,
+            "completed_at": "2026-01-19T17:55:00Z",
+            "time_spent_minutes": null,
+            "notes": null,
+            "attempts": 0,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "1.1.10",
+          "title": "Create .github/PULL_REQUEST_TEMPLATE.md",
+          "status": "completed",
+          "agent_type": "github-git-expert",
+          "depends_on": [],
+          "tracking": {
+            "started_at": null,
+            "completed_at": "2026-01-19T17:55:00Z",
+            "time_spent_minutes": null,
+            "notes": null,
+            "attempts": 0,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "1.1.11",
+          "title": "Create src/sphinx_typesense/ directory structure with __init__.py stub",
+          "status": "completed",
+          "agent_type": "python-backend-engineer",
+          "business_plan_ref": {
+            "section": "File Structure",
+            "lines": [749, 783],
+            "key_content": "src/sphinx_typesense/ with __init__.py, config.py, indexer.py, templates.py, themes.py"
+          },
+          "depends_on": ["1.1.1"],
+          "tracking": {
+            "started_at": null,
+            "completed_at": "2026-01-19T17:55:00Z",
+            "time_spent_minutes": null,
+            "notes": null,
+            "attempts": 0,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "1.1.12",
+          "title": "Create tests/ directory with conftest.py and initial test structure",
+          "status": "completed",
+          "agent_type": "Python Testing Expert",
+          "depends_on": ["1.1.11"],
+          "tracking": {
+            "started_at": null,
+            "completed_at": "2026-01-19T17:55:00Z",
+            "time_spent_minutes": null,
+            "notes": null,
+            "attempts": 0,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Core Extension (MVP)",
+      "description": "Implement basic Sphinx extension with Typesense indexing and search UI injection",
+      "status": "completed",
+      "progress": {
+        "completed": 10,
+        "total": 10,
+        "percentage": 100
+      },
+      "tasks": [
+        {
+          "id": "2.1.1",
+          "title": "Implement config.py with configuration schema and validation",
+          "status": "completed",
+          "agent_type": "python-backend-engineer",
+          "business_plan_ref": {
+            "section": "Configuration Schema",
+            "lines": [436, 479],
+            "key_content": "typesense_host, typesense_port, typesense_protocol, typesense_api_key, typesense_search_api_key"
+          },
+          "depends_on": ["1.1.11"],
+          "tracking": {
+            "started_at": null,
+            "completed_at": null,
+            "time_spent_minutes": null,
+            "notes": null,
+            "attempts": 0,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "2.1.2",
+          "title": "Implement Sphinx extension entry point in __init__.py with event handlers",
+          "status": "completed",
+          "agent_type": "python-backend-engineer",
+          "business_plan_ref": {
+            "section": "Sphinx Extension Entry Point",
+            "lines": [133, 164],
+            "key_content": "setup(app) with config-inited, build-finished, html-page-context events"
+          },
+          "depends_on": ["2.1.1"],
+          "tracking": {
+            "started_at": null,
+            "completed_at": null,
+            "time_spent_minutes": null,
+            "notes": null,
+            "attempts": 0,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "2.1.3",
+          "title": "Define Typesense document schema (DOCS_SCHEMA) with hierarchical fields",
+          "status": "completed",
+          "agent_type": "python-backend-engineer",
+          "business_plan_ref": {
+            "section": "Document Schema",
+            "lines": [166, 198],
+            "key_content": "hierarchy.lvl0-lvl3, content, url, type, version, weight, item_priority"
+          },
+          "depends_on": ["2.1.1"],
+          "tracking": {
+            "started_at": null,
+            "completed_at": null,
+            "time_spent_minutes": null,
+            "notes": null,
+            "attempts": 0,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "2.1.4",
+          "title": "Implement TypesenseIndexer class with client initialization",
+          "status": "completed",
+          "agent_type": "python-backend-engineer",
+          "business_plan_ref": {
+            "section": "Content Extraction",
+            "lines": [200, 257],
+            "key_content": "TypesenseIndexer with _create_client, index_all, _ensure_collection"
+          },
+          "depends_on": ["2.1.3"],
+          "tracking": {
+            "started_at": null,
+            "completed_at": null,
+            "time_spent_minutes": null,
+            "notes": null,
+            "attempts": 0,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "2.1.5",
+          "title": "Implement HTML content extraction with BeautifulSoup (_extract_documents)",
+          "status": "completed",
+          "agent_type": "python-backend-engineer",
+          "business_plan_ref": {
+            "section": "Content Extraction",
+            "lines": [256, 357],
+            "key_content": "_extract_documents parsing h1-h4, p, li elements with hierarchy tracking"
+          },
+          "depends_on": ["2.1.4"],
+          "tracking": {
+            "started_at": null,
+            "completed_at": null,
+            "time_spent_minutes": null,
+            "notes": null,
+            "attempts": 0,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "2.1.6",
+          "title": "Implement templates.py for search asset injection",
+          "status": "completed",
+          "agent_type": "python-backend-engineer",
+          "business_plan_ref": {
+            "section": "Template Injection",
+            "lines": [396, 433],
+            "key_content": "inject_search_assets adding TYPESENSE_CONFIG to page context"
+          },
+          "depends_on": ["2.1.2"],
+          "tracking": {
+            "started_at": null,
+            "completed_at": null,
+            "time_spent_minutes": null,
+            "notes": null,
+            "attempts": 0,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "2.1.7",
+          "title": "Create static/typesense-init.js frontend initialization script",
+          "status": "completed",
+          "agent_type": "ui-engineer",
+          "business_plan_ref": {
+            "section": "Frontend Integration",
+            "lines": [359, 394],
+            "key_content": "docsearch() initialization with typesense-docsearch.js"
+          },
+          "depends_on": ["2.1.6"],
+          "tracking": {
+            "started_at": null,
+            "completed_at": null,
+            "time_spent_minutes": null,
+            "notes": null,
+            "attempts": 0,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "2.1.8",
+          "title": "Implement themes.py with content selectors for RTD theme",
+          "status": "completed",
+          "agent_type": "python-backend-engineer",
+          "business_plan_ref": {
+            "section": "Theme Support",
+            "lines": [571, 605],
+            "key_content": "Content selectors: .wy-nav-content-wrap for RTD"
+          },
+          "depends_on": ["2.1.5"],
+          "tracking": {
+            "started_at": null,
+            "completed_at": null,
+            "time_spent_minutes": null,
+            "notes": null,
+            "attempts": 0,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "2.1.9",
+          "title": "Write unit tests for config validation",
+          "status": "completed",
+          "agent_type": "Python Testing Expert",
+          "business_plan_ref": {
+            "section": "Testing Strategy",
+            "lines": [648, 706],
+            "key_content": "test_config.py for configuration validation"
+          },
+          "depends_on": ["2.1.1", "1.1.12"],
+          "tracking": {
+            "started_at": null,
+            "completed_at": null,
+            "time_spent_minutes": null,
+            "notes": null,
+            "attempts": 0,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "2.1.10",
+          "title": "Write unit tests for content extraction (test_indexer.py)",
+          "status": "completed",
+          "agent_type": "Python Testing Expert",
+          "business_plan_ref": {
+            "section": "Testing Strategy - Unit Tests",
+            "lines": [652, 670],
+            "key_content": "test_extract_hierarchy verifying hierarchical content extraction"
+          },
+          "depends_on": ["2.1.5", "1.1.12"],
+          "tracking": {
+            "started_at": null,
+            "completed_at": null,
+            "time_spent_minutes": null,
+            "notes": null,
+            "attempts": 0,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Documentation Setup",
+      "description": "Create Sphinx documentation with shibuya theme following library patterns",
+      "status": "completed",
+      "progress": {
+        "completed": 8,
+        "total": 8,
+        "percentage": 100
+      },
+      "tasks": [
+        {
+          "id": "3.1.1",
+          "title": "Create docs/conf.py with shibuya theme and standard extensions",
+          "status": "completed",
+          "agent_type": "documentation-expert",
+          "depends_on": ["1.1.1"],
+          "tracking": {
+            "started_at": null,
+            "completed_at": null,
+            "time_spent_minutes": null,
+            "notes": null,
+            "attempts": 0,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "3.1.2",
+          "title": "Create docs/index.rst with project overview and grid layout",
+          "status": "completed",
+          "agent_type": "documentation-expert",
+          "depends_on": ["3.1.1"],
+          "tracking": {
+            "started_at": null,
+            "completed_at": null,
+            "time_spent_minutes": null,
+            "notes": null,
+            "attempts": 0,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "3.1.3",
+          "title": "Create docs/getting-started/ with installation and quickstart guides",
+          "status": "completed",
+          "agent_type": "documentation-expert",
+          "business_plan_ref": {
+            "section": "Configuration Schema",
+            "lines": [436, 496],
+            "key_content": "Required and optional settings documentation"
+          },
+          "depends_on": ["3.1.2"],
+          "tracking": {
+            "started_at": null,
+            "completed_at": null,
+            "time_spent_minutes": null,
+            "notes": null,
+            "attempts": 0,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "3.1.4",
+          "title": "Create docs/configuration.rst with all config options",
+          "status": "completed",
+          "agent_type": "documentation-expert",
+          "business_plan_ref": {
+            "section": "Configuration Schema",
+            "lines": [436, 496],
+            "key_content": "All configuration options with examples"
+          },
+          "depends_on": ["3.1.2", "2.1.1"],
+          "tracking": {
+            "started_at": null,
+            "completed_at": null,
+            "time_spent_minutes": null,
+            "notes": null,
+            "attempts": 0,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "3.1.5",
+          "title": "Create docs/themes.rst documenting theme support and custom selectors",
+          "status": "completed",
+          "agent_type": "documentation-expert",
+          "business_plan_ref": {
+            "section": "Theme Support",
+            "lines": [571, 605],
+            "key_content": "Supported themes and custom theme configuration"
+          },
+          "depends_on": ["3.1.2"],
+          "tracking": {
+            "started_at": null,
+            "completed_at": null,
+            "time_spent_minutes": null,
+            "notes": null,
+            "attempts": 0,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "3.1.6",
+          "title": "Create docs/api/ with autodoc for Python API reference",
+          "status": "completed",
+          "agent_type": "documentation-expert",
+          "business_plan_ref": {
+            "section": "API Reference",
+            "lines": [536, 568],
+            "key_content": "Sphinx events, Python API, JavaScript API"
+          },
+          "depends_on": ["3.1.2", "2.1.5"],
+          "tracking": {
+            "started_at": null,
+            "completed_at": null,
+            "time_spent_minutes": null,
+            "notes": null,
+            "attempts": 0,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "3.1.7",
+          "title": "Create docs/_static/custom.css for theme customizations",
+          "status": "completed",
+          "agent_type": "documentation-expert",
+          "depends_on": ["3.1.1"],
+          "tracking": {
+            "started_at": null,
+            "completed_at": null,
+            "time_spent_minutes": null,
+            "notes": null,
+            "attempts": 0,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "3.1.8",
+          "title": "Create docs/security.rst documenting API key separation",
+          "status": "completed",
+          "agent_type": "documentation-expert",
+          "business_plan_ref": {
+            "section": "Security Considerations",
+            "lines": [607, 645],
+            "key_content": "API key separation, search-only keys, CI/CD best practices"
+          },
+          "depends_on": ["3.1.2"],
+          "tracking": {
+            "started_at": null,
+            "completed_at": null,
+            "time_spent_minutes": null,
+            "notes": null,
+            "attempts": 0,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "name": "Theme Support & Polish",
+      "description": "Add support for additional themes and improve error handling",
+      "status": "completed",
+      "progress": {
+        "completed": 8,
+        "total": 8,
+        "percentage": 100
+      },
+      "tasks": [
+        {
+          "id": "4.1.1",
+          "title": "Add Furo theme content selectors and test",
+          "status": "completed",
+          "agent_type": "python-backend-engineer",
+          "business_plan_ref": {
+            "section": "Theme Support",
+            "lines": [576, 582],
+            "key_content": "article[role=main] for Furo"
+          },
+          "depends_on": ["2.1.8"],
+          "tracking": {
+            "started_at": "2026-01-19T18:30:00Z",
+            "completed_at": "2026-01-19T19:00:00Z",
+            "time_spent_minutes": null,
+            "notes": "Selectors existed from Phase 2, added comprehensive tests in test_themes.py",
+            "attempts": 1,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "4.1.2",
+          "title": "Add Alabaster theme content selectors and test",
+          "status": "completed",
+          "agent_type": "python-backend-engineer",
+          "business_plan_ref": {
+            "section": "Theme Support",
+            "lines": [576, 582],
+            "key_content": ".body for Alabaster"
+          },
+          "depends_on": ["2.1.8"],
+          "tracking": {
+            "started_at": "2026-01-19T18:30:00Z",
+            "completed_at": "2026-01-19T19:00:00Z",
+            "time_spent_minutes": null,
+            "notes": "Selectors existed from Phase 2, added comprehensive tests in test_themes.py",
+            "attempts": 1,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "4.1.3",
+          "title": "Add PyData theme content selectors and test",
+          "status": "completed",
+          "agent_type": "python-backend-engineer",
+          "business_plan_ref": {
+            "section": "Theme Support",
+            "lines": [576, 582],
+            "key_content": "article.bd-article for PyData"
+          },
+          "depends_on": ["2.1.8"],
+          "tracking": {
+            "started_at": "2026-01-19T18:30:00Z",
+            "completed_at": "2026-01-19T19:00:00Z",
+            "time_spent_minutes": null,
+            "notes": "Selectors existed from Phase 2, added comprehensive tests in test_themes.py",
+            "attempts": 1,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "4.1.4",
+          "title": "Implement graceful degradation when Typesense is unavailable",
+          "status": "completed",
+          "agent_type": "python-backend-engineer",
+          "business_plan_ref": {
+            "section": "Implementation Phases - Phase 2",
+            "lines": [516, 521],
+            "key_content": "Error handling: Graceful degradation if Typesense unavailable"
+          },
+          "depends_on": ["2.1.4"],
+          "tracking": {
+            "started_at": "2026-01-19T18:30:00Z",
+            "completed_at": "2026-01-19T19:00:00Z",
+            "time_spent_minutes": null,
+            "notes": "Added _check_connection() with exponential backoff, specific exception handling, graceful degradation in index_all()",
+            "attempts": 1,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "4.1.5",
+          "title": "Add structured logging for debugging",
+          "status": "completed",
+          "agent_type": "python-backend-engineer",
+          "business_plan_ref": {
+            "section": "Implementation Phases - Phase 2",
+            "lines": [516, 521],
+            "key_content": "Logging: Add structured logging for debugging"
+          },
+          "depends_on": ["2.1.5"],
+          "tracking": {
+            "started_at": "2026-01-19T18:30:00Z",
+            "completed_at": "2026-01-19T19:00:00Z",
+            "time_spent_minutes": null,
+            "notes": "Added structured logging to all 5 source files with DEBUG/INFO/WARNING levels",
+            "attempts": 1,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "4.1.6",
+          "title": "Write integration tests with Typesense (test_integration.py)",
+          "status": "completed",
+          "agent_type": "Python Testing Expert",
+          "business_plan_ref": {
+            "section": "Testing Strategy - Integration Tests",
+            "lines": [672, 687],
+            "key_content": "test_full_build_and_index with actual Typesense server"
+          },
+          "depends_on": ["2.1.10"],
+          "tracking": {
+            "started_at": "2026-01-19T18:30:00Z",
+            "completed_at": "2026-01-19T19:00:00Z",
+            "time_spent_minutes": null,
+            "notes": "Created test_integration.py with 26 integration tests covering connection, indexing, search, and error handling",
+            "attempts": 1,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "4.1.7",
+          "title": "Create tests/docker-compose.yml for Typesense test container",
+          "status": "completed",
+          "agent_type": "python-backend-engineer",
+          "depends_on": ["4.1.6"],
+          "tracking": {
+            "started_at": "2026-01-19T18:30:00Z",
+            "completed_at": "2026-01-19T19:00:00Z",
+            "time_spent_minutes": null,
+            "notes": "Created docker-compose.yml and added Makefile targets: typesense-up, typesense-down, test-integration",
+            "attempts": 1,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "4.1.8",
+          "title": "Add Shibuya theme content selectors and test",
+          "status": "completed",
+          "agent_type": "python-backend-engineer",
+          "business_plan_ref": {
+            "section": "Theme Support",
+            "lines": [576, 582],
+            "key_content": "Shibuya theme selectors for sphinx-typesense documentation"
+          },
+          "depends_on": ["2.1.8"],
+          "tracking": {
+            "started_at": "2026-01-19T18:30:00Z",
+            "completed_at": "2026-01-19T19:00:00Z",
+            "time_spent_minutes": null,
+            "notes": "Added Shibuya theme selectors (article.yue[role=main], .sy-main) and comprehensive tests",
+            "attempts": 1,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "name": "Examples & Release Prep",
+      "description": "Create example Litestar app with multi-theme docs and prepare for release",
+      "status": "completed",
+      "progress": {
+        "completed": 6,
+        "total": 6,
+        "percentage": 100
+      },
+      "tasks": [
+        {
+          "id": "5.1.1",
+          "title": "Create examples/litestar-app/ - sample Litestar API project to document",
+          "status": "completed",
+          "agent_type": "python-backend-engineer",
+          "business_plan_ref": {
+            "section": "File Structure",
+            "lines": [778, 781],
+            "key_content": "Example app with API endpoints for documentation testing"
+          },
+          "depends_on": ["2.1.7"],
+          "tracking": {
+            "started_at": "2026-01-19T19:46:00Z",
+            "completed_at": "2026-01-19T19:47:00Z",
+            "time_spent_minutes": null,
+            "notes": "Created Litestar API with controllers (health, users, items), Pydantic models, comprehensive docstrings",
+            "attempts": 1,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "5.1.2",
+          "title": "Create examples/docs/ with theme configs (rtd, furo, alabaster, pydata, shibuya)",
+          "status": "completed",
+          "agent_type": "python-backend-engineer",
+          "depends_on": ["5.1.1", "4.1.8"],
+          "tracking": {
+            "started_at": "2026-01-19T19:47:00Z",
+            "completed_at": "2026-01-19T19:47:00Z",
+            "time_spent_minutes": null,
+            "notes": "Created source/ with shared RST content and 5 theme-specific conf.py files with sphinx-typesense config",
+            "attempts": 1,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "5.1.3",
+          "title": "Create examples/Makefile to build/serve each theme for testing",
+          "status": "completed",
+          "agent_type": "python-backend-engineer",
+          "depends_on": ["5.1.2"],
+          "tracking": {
+            "started_at": "2026-01-19T19:47:00Z",
+            "completed_at": "2026-01-19T19:47:00Z",
+            "time_spent_minutes": null,
+            "notes": "Created Makefile with docs-{theme}, serve-{theme}, docs-all, and clean targets",
+            "attempts": 1,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "5.1.4",
+          "title": "Create README.md with badges, installation, and quick example",
+          "status": "completed",
+          "agent_type": "documentation-expert",
+          "depends_on": ["2.1.7"],
+          "tracking": {
+            "started_at": "2026-01-19T19:46:00Z",
+            "completed_at": "2026-01-19T19:47:00Z",
+            "time_spent_minutes": null,
+            "notes": "Created README.md with badges, features, installation, quick start config example, and docs links",
+            "attempts": 1,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "5.1.5",
+          "title": "Create CONTRIBUTING.rst with development setup guide",
+          "status": "completed",
+          "agent_type": "documentation-expert",
+          "depends_on": ["1.1.2"],
+          "tracking": {
+            "started_at": "2026-01-19T19:46:00Z",
+            "completed_at": "2026-01-19T19:47:00Z",
+            "time_spent_minutes": null,
+            "notes": "Created CONTRIBUTING.rst with dev setup, workflow, PR guidelines, code style, and integration testing",
+            "attempts": 1,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "5.1.6",
+          "title": "Create LICENSE file (MIT)",
+          "status": "completed",
+          "agent_type": "general-purpose",
+          "depends_on": [],
+          "tracking": {
+            "started_at": "2026-01-19T19:46:00Z",
+            "completed_at": "2026-01-19T19:47:00Z",
+            "time_spent_minutes": null,
+            "notes": "Created MIT LICENSE file with JacobCoffee copyright 2026",
+            "attempts": 1,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "name": "Dual Backend Support (Typesense + Pagefind)",
+      "description": "Add Pagefind as a static search fallback and refactor to support multiple search backends",
+      "status": "completed",
+      "progress": {
+        "completed": 12,
+        "total": 12,
+        "percentage": 100
+      },
+      "tasks": [
+        {
+          "id": "6.1.1",
+          "title": "Add typesense_backend config option ('auto' | 'typesense' | 'pagefind')",
+          "status": "completed",
+          "agent_type": "python-backend-engineer",
+          "depends_on": ["2.1.1"],
+          "tracking": {
+            "started_at": "2026-01-19T19:15:00Z",
+            "completed_at": "2026-01-19T19:20:00Z",
+            "time_spent_minutes": 5,
+            "notes": "Added VALID_BACKENDS, get_effective_backend(), _validate_backend(), updated validate_config() to skip API key validation for Pagefind",
+            "attempts": 1,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "6.1.2",
+          "title": "Create backends/ package with base class and interface",
+          "status": "completed",
+          "agent_type": "python-backend-engineer",
+          "depends_on": ["6.1.1"],
+          "tracking": {
+            "started_at": "2026-01-19T19:22:00Z",
+            "completed_at": "2026-01-19T19:25:00Z",
+            "time_spent_minutes": 3,
+            "notes": "Created backends/__init__.py, backends/base.py with SearchBackend ABC, index_all(), get_js_files(), get_css_files(), get_config_script(), is_available()",
+            "attempts": 1,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "6.1.3",
+          "title": "Refactor Typesense indexer into backends/typesense.py",
+          "status": "completed",
+          "agent_type": "python-backend-engineer",
+          "depends_on": ["6.1.2"],
+          "tracking": {
+            "started_at": "2026-01-19T19:28:00Z",
+            "completed_at": "2026-01-19T19:35:00Z",
+            "time_spent_minutes": 7,
+            "notes": "Created TypesenseBackend with get_js_files, get_css_files, get_config_script. Kept backward-compatible TypesenseIndexer alias.",
+            "attempts": 1,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "6.1.4",
+          "title": "Implement backends/pagefind.py with PagefindBackend class",
+          "status": "completed",
+          "agent_type": "python-backend-engineer",
+          "depends_on": ["6.1.2"],
+          "tracking": {
+            "started_at": "2026-01-19T19:28:00Z",
+            "completed_at": "2026-01-19T19:35:00Z",
+            "time_spent_minutes": 7,
+            "notes": "Created PagefindBackend with CLI detection, npx fallback, page count parsing. 25 tests added.",
+            "attempts": 1,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "6.1.5",
+          "title": "Create static/pagefind-init.js for Pagefind UI initialization",
+          "status": "completed",
+          "agent_type": "ui-engineer",
+          "depends_on": ["6.1.4"],
+          "tracking": {
+            "started_at": "2026-01-19T19:40:00Z",
+            "completed_at": "2026-01-19T19:42:00Z",
+            "time_spent_minutes": 2,
+            "notes": "Created pagefind-init.js with dynamic loading, config from PAGEFIND_CONFIG, and pagefind-ui.css with theme support",
+            "attempts": 1,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "6.1.6",
+          "title": "Update templates.py to inject backend-specific assets",
+          "status": "completed",
+          "agent_type": "python-backend-engineer",
+          "depends_on": ["6.1.3", "6.1.5"],
+          "tracking": {
+            "started_at": "2026-01-19T19:45:00Z",
+            "completed_at": "2026-01-19T19:50:00Z",
+            "time_spent_minutes": 5,
+            "notes": "Added get_typesense_config_script(), get_pagefind_config_script(), updated inject_search_assets()",
+            "attempts": 1,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "6.1.7",
+          "title": "Update __init__.py to select backend based on config",
+          "status": "completed",
+          "agent_type": "python-backend-engineer",
+          "depends_on": ["6.1.6"],
+          "tracking": {
+            "started_at": "2026-01-19T19:45:00Z",
+            "completed_at": "2026-01-19T19:50:00Z",
+            "time_spent_minutes": 5,
+            "notes": "Added get_backend() factory, _add_static_files(), updated index_documents()",
+            "attempts": 1,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "6.1.8",
+          "title": "Add tests/docker-compose.yml target for local Typesense",
+          "status": "completed",
+          "agent_type": "python-backend-engineer",
+          "depends_on": ["6.1.3"],
+          "tracking": {
+            "started_at": "2026-01-19T18:30:00Z",
+            "completed_at": "2026-01-19T19:00:00Z",
+            "time_spent_minutes": 0,
+            "notes": "Already completed in Phase 4 - docker-compose.yml exists with typesense:27.1 container",
+            "attempts": 1,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "6.1.9",
+          "title": "Write unit tests for backend selection logic",
+          "status": "completed",
+          "agent_type": "Python Testing Expert",
+          "depends_on": ["6.1.7"],
+          "tracking": {
+            "started_at": "2026-01-19T19:45:00Z",
+            "completed_at": "2026-01-19T19:50:00Z",
+            "time_spent_minutes": 5,
+            "notes": "Completed as part of 6.1.7 - tests in test_init.py and test_config.py for get_backend(), get_effective_backend()",
+            "attempts": 1,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "6.1.10",
+          "title": "Write unit tests for PagefindBackend",
+          "status": "completed",
+          "agent_type": "Python Testing Expert",
+          "depends_on": ["6.1.4"],
+          "tracking": {
+            "started_at": "2026-01-19T19:28:00Z",
+            "completed_at": "2026-01-19T19:35:00Z",
+            "time_spent_minutes": 7,
+            "notes": "Completed as part of 6.1.4 - 25 comprehensive tests for PagefindBackend",
+            "attempts": 1,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "6.1.11",
+          "title": "Update documentation for dual backend support",
+          "status": "completed",
+          "agent_type": "documentation-expert",
+          "depends_on": ["6.1.7"],
+          "tracking": {
+            "started_at": "2026-01-19T19:55:00Z",
+            "completed_at": "2026-01-19T20:00:00Z",
+            "time_spent_minutes": 5,
+            "notes": "Created docs/backends.rst, updated configuration.rst, quickstart.rst, index.rst",
+            "attempts": 1,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        },
+        {
+          "id": "6.1.12",
+          "title": "Update own docs to use sphinx-typesense with auto backend",
+          "status": "completed",
+          "agent_type": "documentation-expert",
+          "depends_on": ["6.1.11"],
+          "tracking": {
+            "started_at": "2026-01-19T19:55:00Z",
+            "completed_at": "2026-01-19T20:00:00Z",
+            "time_spent_minutes": 5,
+            "notes": "Updated docs/conf.py with auto backend config, extension now dogfoods itself",
+            "attempts": 1,
+            "last_error": null,
+            "assigned_agent_id": null
+          }
+        }
+      ]
+    }
+  ],
+  "decisions": {
+    "pending": [],
+    "resolved": [
+      {
+        "id": "D1",
+        "question": "Which build backend to use?",
+        "options": ["hatchling", "uv_build", "setuptools"],
+        "recommended": "uv_build",
+        "decided": "uv_build",
+        "decided_at": "2026-01-19T02:30:00Z",
+        "decided_by": "user-preference",
+        "business_plan_ref": null
+      },
+      {
+        "id": "D2",
+        "question": "Which Sphinx theme to use for documentation?",
+        "options": ["shibuya", "furo", "sphinx_rtd_theme"],
+        "recommended": "shibuya",
+        "decided": "shibuya",
+        "decided_at": "2026-01-19T02:30:00Z",
+        "decided_by": "user-preference",
+        "business_plan_ref": null
+      },
+      {
+        "id": "D3",
+        "question": "Which pre-commit framework to use?",
+        "options": ["pre-commit", "prek"],
+        "recommended": "prek",
+        "decided": "prek",
+        "decided_at": "2026-01-19T02:30:00Z",
+        "decided_by": "user-preference",
+        "business_plan_ref": null
+      }
+    ]
+  },
+  "success_metrics": {
+    "business_plan_ref": {
+      "section": "Goals & Non-Goals",
+      "lines": [66, 86],
+      "key_content": "P0: Replace Sphinx default search, support Typesense Server/Cloud, work with RTD theme"
+    },
+    "targets": [
+      {
+        "metric": "RTD theme support",
+        "target": "Working out of the box",
+        "current": null
+      },
+      {
+        "metric": "Typesense Server support",
+        "target": "Self-hosted and Cloud",
+        "current": null
+      },
+      {
+        "metric": "Test coverage",
+        "target": ">80%",
+        "current": null
+      },
+      {
+        "metric": "Documentation completeness",
+        "target": "Installation, configuration, themes, API",
+        "current": null
+      }
+    ]
+  },
+  "blockers": []
+}

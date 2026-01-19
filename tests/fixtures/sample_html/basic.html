@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Installation Guide - sphinx-typesense</title>
+</head>
+<body>
+    <!--
+    This is a sample HTML file used for testing content extraction.
+    It includes the typical structure found in Sphinx documentation
+    with various heading levels, paragraphs, and list items.
+    -->
+
+    <div class="body">
+        <!-- Main page heading (H1) -->
+        <h1 id="installation">Installation</h1>
+        <p>This guide covers the installation process for sphinx-typesense,
+           a Sphinx extension for integrating Typesense search.</p>
+
+        <!-- Section heading (H2) -->
+        <h2 id="prerequisites">Prerequisites</h2>
+        <p>Before installing sphinx-typesense, ensure you have the following:</p>
+        <ul>
+            <li>Python 3.9 or higher installed on your system</li>
+            <li>pip or uv package manager available</li>
+            <li>Access to a Typesense server (local or Typesense Cloud)</li>
+        </ul>
+
+        <!-- Subsection heading (H3) -->
+        <h3 id="python-version">Python Version Requirements</h3>
+        <p>sphinx-typesense requires Python 3.9 or later. You can check your
+           Python version by running:</p>
+        <pre><code>python --version</code></pre>
+
+        <!-- Another H2 section -->
+        <h2 id="installation-methods">Installation Methods</h2>
+        <p>There are several ways to install sphinx-typesense depending on
+           your preferred workflow.</p>
+
+        <!-- H3 under new H2 -->
+        <h3 id="pip-install">Using pip</h3>
+        <p>The simplest way to install is using pip:</p>
+        <pre><code>pip install sphinx-typesense</code></pre>
+        <p>This will install the package and all required dependencies.</p>
+
+        <h3 id="uv-install">Using uv</h3>
+        <p>For faster installation with uv:</p>
+        <pre><code>uv add sphinx-typesense</code></pre>
+
+        <h3 id="from-source">Installing from Source</h3>
+        <p>To install the latest development version from source:</p>
+        <ol>
+            <li>Clone the repository from GitHub</li>
+            <li>Navigate to the project directory</li>
+            <li>Install with pip in editable mode</li>
+        </ol>
+        <pre><code>git clone https://github.com/JacobCoffee/sphinx-typesense.git
+cd sphinx-typesense
+pip install -e .</code></pre>
+
+        <!-- H2 section -->
+        <h2 id="configuration">Basic Configuration</h2>
+        <p>After installation, add the extension to your Sphinx conf.py:</p>
+        <pre><code>extensions = ["sphinx_typesense"]</code></pre>
+
+        <!-- H3 under configuration -->
+        <h3 id="required-settings">Required Settings</h3>
+        <p>Configure the connection to your Typesense server:</p>
+        <pre><code>typesense_host = "localhost"
+typesense_port = "8108"
+typesense_protocol = "http"
+typesense_api_key = "your_admin_key"
+typesense_search_api_key = "your_search_key"</code></pre>
+
+        <!-- Deep nesting test (H4) -->
+        <h4 id="api-keys">API Key Configuration</h4>
+        <p>You should use separate API keys for indexing and searching.
+           The admin key is used during build time for indexing, while
+           the search key is exposed in the frontend for queries.</p>
+
+        <!-- Final section -->
+        <h2 id="next-steps">Next Steps</h2>
+        <p>After installation and configuration:</p>
+        <ul>
+            <li>Run sphinx-build to index your documentation</li>
+            <li>Verify the search UI appears in your built documentation</li>
+            <li>Test search functionality with various queries</li>
+        </ul>
+        <p>For advanced configuration options, see the Configuration Guide.</p>
+    </div>
+</body>
+</html>

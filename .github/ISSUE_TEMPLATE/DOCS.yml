@@ -1,0 +1,104 @@
+name: Documentation Issue
+description: Report missing, incorrect, or unclear documentation
+title: "[Docs]: "
+labels: ["documentation", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Help us improve our documentation! Please describe what needs to be added, corrected, or clarified.
+
+  - type: dropdown
+    id: doc-type
+    attributes:
+      label: Documentation Type
+      description: What type of documentation needs improvement?
+      options:
+        - Installation / Getting Started
+        - Configuration Reference
+        - API Documentation
+        - Theme Integration Guide
+        - Typesense Cloud Setup
+        - Self-Hosted Setup
+        - Troubleshooting Guide
+        - Contributing Guide
+        - Examples / Tutorials
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: location
+    attributes:
+      label: Documentation Location
+      description: |
+        Where is the documentation that needs improvement?
+        Provide a URL or describe the location (e.g., README, specific doc page).
+      placeholder: |
+        URL: https://...
+        Or: The configuration section in the README
+    validations:
+      required: true
+
+  - type: textarea
+    id: current-issue
+    attributes:
+      label: Current Content Issues
+      description: |
+        What's wrong with the current documentation?
+        Is it missing, incorrect, outdated, or unclear?
+      placeholder: |
+        - Missing information about...
+        - Incorrect example for...
+        - Unclear explanation of...
+    validations:
+      required: true
+
+  - type: textarea
+    id: suggested-improvement
+    attributes:
+      label: Suggested Improvements
+      description: |
+        How should the documentation be improved?
+        What information should be added or clarified?
+      placeholder: |
+        The documentation should:
+        - Add a section about...
+        - Clarify that...
+        - Include an example showing...
+    validations:
+      required: true
+
+  - type: textarea
+    id: example
+    attributes:
+      label: Example Content
+      description: |
+        If applicable, provide example text or code that could be added to the documentation.
+      render: markdown
+      placeholder: |
+        Example documentation content:
+        
+        ## New Section
+        
+        To configure X, add the following to your `conf.py`:
+        
+        ```python
+        typesense_config = {
+            "option": "value",
+        }
+        ```
+
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contribution Interest
+      description: Would you be interested in contributing this documentation improvement?
+      options:
+        - label: I would be willing to submit a PR with these documentation changes
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Add any other context about the documentation issue here.

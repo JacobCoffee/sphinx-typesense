@@ -1,0 +1,14 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Typesense Documentation
+    url: https://typesense.org/docs/
+    about: Official Typesense documentation for server setup and API reference
+  - name: Typesense DocSearch Guide
+    url: https://typesense.org/docs/guide/docsearch.html
+    about: Typesense DocSearch integration guide
+  - name: Sphinx Documentation
+    url: https://www.sphinx-doc.org/en/master/
+    about: Official Sphinx documentation for general Sphinx questions
+  - name: GitHub Discussions
+    url: https://github.com/JacobCoffee/sphinx-typesense/discussions
+    about: Ask questions and discuss sphinx-typesense with the community

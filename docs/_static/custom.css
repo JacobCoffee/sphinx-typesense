@@ -1,0 +1,44 @@
+/* Custom CSS for sphinx-typesense documentation */
+
+/* Shibuya theme customizations */
+
+/* Code block styling */
+.highlight pre {
+    border-radius: 6px;
+}
+
+/* Configuration table styling */
+.rst-content table.docutils td,
+.rst-content table.docutils th {
+    padding: 8px 12px;
+}
+
+/* API reference improvements */
+.sig-name {
+    font-weight: 600;
+}
+
+/* Warning and note admonitions */
+.admonition {
+    border-radius: 6px;
+}
+
+/* Grid cards on index page */
+.sd-card {
+    transition: box-shadow 0.2s ease-in-out;
+}
+
+.sd-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Inline code styling */
+code.literal {
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+/* Table of contents styling */
+.toctree-wrapper .toctree-l1 > a {
+    font-weight: 500;
+}

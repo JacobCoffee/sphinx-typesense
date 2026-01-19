@@ -1,0 +1,88 @@
+name: Feature Request
+description: Suggest a new feature or enhancement for sphinx-typesense
+title: "[Feature]: "
+labels: ["enhancement", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a new feature! Please fill out the form below to help us understand your request.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Feature Description
+      description: A clear and concise description of the feature you'd like to see.
+      placeholder: Describe the feature...
+    validations:
+      required: true
+
+  - type: textarea
+    id: use-case
+    attributes:
+      label: Use Case / Motivation
+      description: |
+        Explain the problem this feature would solve or the use case it addresses.
+        Why do you need this feature? How would it benefit your documentation workflow?
+      placeholder: |
+        As a documentation author, I want to...
+        This would help me...
+    validations:
+      required: true
+
+  - type: textarea
+    id: implementation
+    attributes:
+      label: Proposed Implementation
+      description: |
+        If you have ideas about how this could be implemented, share them here.
+        This is optional but helpful for discussion.
+      placeholder: |
+        This could be implemented by...
+        
+        Example configuration:
+        ```python
+        typesense_config = {
+            "new_option": "value",
+        }
+        ```
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: |
+        Have you considered any alternative solutions or workarounds?
+        What other approaches did you think about?
+      placeholder: |
+        I considered...
+        
+        Current workaround:
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority / Impact
+      description: How important is this feature to you?
+      options:
+        - "Nice to have - would improve my experience"
+        - "Important - significantly impacts my workflow"
+        - "Critical - blocking my adoption/use of sphinx-typesense"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contribution Interest
+      description: Would you be interested in contributing to this feature?
+      options:
+        - label: I would be willing to submit a PR for this feature
+        - label: I could help with testing the implementation
+        - label: I could help with documentation for this feature
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Add any other context, mockups, or examples about the feature request here.

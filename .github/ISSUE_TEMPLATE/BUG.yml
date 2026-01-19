@@ -1,0 +1,139 @@
+name: Bug Report
+description: Report a bug or unexpected behavior in sphinx-typesense
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug! Please fill out the form below to help us understand and fix the issue.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of what the bug is.
+      placeholder: Describe the bug...
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: Provide detailed steps to reproduce the behavior.
+      placeholder: |
+        1. Configure sphinx-typesense with...
+        2. Run sphinx-build...
+        3. Search for...
+        4. See error...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen?
+      placeholder: Describe the expected behavior...
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happened?
+      placeholder: Describe the actual behavior...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: sphinx-version
+    attributes:
+      label: Sphinx Version
+      description: What version of Sphinx are you using?
+      options:
+        - "7.4.x"
+        - "7.3.x"
+        - "7.2.x"
+        - "7.1.x"
+        - "7.0.x"
+        - "6.x"
+        - "5.x"
+        - "Other (specify in additional context)"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: python-version
+    attributes:
+      label: Python Version
+      description: What version of Python are you using?
+      options:
+        - "3.13"
+        - "3.12"
+        - "3.11"
+        - "3.10"
+        - "3.9"
+        - "Other (specify in additional context)"
+    validations:
+      required: true
+
+  - type: input
+    id: typesense-version
+    attributes:
+      label: Typesense Version
+      description: What version of Typesense server are you using?
+      placeholder: "e.g., 27.0, 26.0, Cloud"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: theme
+    attributes:
+      label: Sphinx Theme
+      description: Which Sphinx theme are you using?
+      options:
+        - sphinx_rtd_theme (Read the Docs)
+        - furo
+        - alabaster
+        - pydata_sphinx_theme
+        - sphinx_book_theme
+        - Other (specify in additional context)
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant Logs / Error Output
+      description: Please copy and paste any relevant log output or error messages.
+      render: shell
+      placeholder: |
+        Paste error messages, stack traces, or build output here...
+
+  - type: textarea
+    id: config
+    attributes:
+      label: Configuration
+      description: Share your relevant `conf.py` configuration (redact any API keys).
+      render: python
+      placeholder: |
+        typesense_config = {
+            "host": "localhost",
+            "port": 8108,
+            ...
+        }
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: If applicable, add screenshots to help explain your problem.
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Add any other context about the problem here.

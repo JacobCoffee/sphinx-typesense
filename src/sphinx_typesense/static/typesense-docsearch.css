@@ -1,0 +1,224 @@
+/**
+ * sphinx-typesense: DocSearch CSS overrides
+ * Base styles are loaded from CDN; this file is for customizations
+ *
+ * CDN Base Styles:
+ *   https://cdn.jsdelivr.net/npm/typesense-docsearch-css@0.4.1
+ */
+
+#typesense-search {
+  display: inline-block;
+}
+
+/* RTD Theme - Dark sidebar compatibility */
+.wy-side-nav-search #typesense-search {
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+.wy-side-nav-search #typesense-search .DocSearch-Button {
+  width: 100%;
+  margin: 0;
+}
+
+/* Furo Theme - Search integration */
+[role="search"] #typesense-search {
+  display: flex;
+  width: 100%;
+}
+
+[role="search"] #typesense-search .DocSearch-Button {
+  width: 100%;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+  background: var(--color-background-secondary, #f8f9fb);
+  border: 1px solid var(--color-background-border, #e1e4e8);
+  color: var(--color-foreground-primary, #2d2d2d);
+  padding: 0 1rem;
+  font-size: 0.9rem;
+}
+
+[role="search"] #typesense-search .DocSearch-Button:hover {
+  background: var(--color-background-hover, #efeff4);
+  border-color: var(--color-brand-primary, #2962ff);
+}
+
+[role="search"] #typesense-search .DocSearch-Button-Placeholder {
+  color: var(--color-foreground-secondary, #5a5a5a);
+  font-size: 0.9rem;
+}
+
+[role="search"] #typesense-search .DocSearch-Search-Icon {
+  color: var(--color-foreground-secondary, #5a5a5a);
+}
+
+/* Furo Theme - Dark mode support */
+html[data-theme="dark"] .DocSearch {
+  --docsearch-text-color: #f5f5f5;
+  --docsearch-container-background: rgba(0, 0, 0, 0.8);
+  --docsearch-modal-background: #1a1a1a;
+  --docsearch-searchbox-background: #2d2d2d;
+  --docsearch-searchbox-focus-background: #3d3d3d;
+  --docsearch-hit-background: #2d2d2d;
+  --docsearch-hit-color: #f5f5f5;
+  --docsearch-footer-background: #1a1a1a;
+}
+
+html[data-theme="dark"] [role="search"] #typesense-search .DocSearch-Button {
+  background: var(--color-background-secondary, #1a1c1e);
+  border-color: var(--color-background-border, #303335);
+  color: var(--color-foreground-primary, #ced4da);
+}
+
+html[data-theme="dark"] [role="search"] #typesense-search .DocSearch-Button-Placeholder,
+html[data-theme="dark"] [role="search"] #typesense-search .DocSearch-Search-Icon {
+  color: var(--color-foreground-secondary, #9ca0a5);
+}
+
+/* PyData Theme - Search in navbar */
+.navbar-persistent--container #typesense-search {
+  display: flex;
+}
+
+.navbar-persistent--container #typesense-search .DocSearch-Button {
+  height: 2.25rem;
+  border-radius: 0.25rem;
+  background: var(--pst-color-background);
+  border: 1px solid var(--pst-color-border);
+  color: var(--pst-color-text-base);
+  padding: 0 0.75rem;
+}
+
+.navbar-persistent--container #typesense-search .DocSearch-Button:hover {
+  background: var(--pst-color-surface);
+  border-color: var(--pst-color-primary);
+}
+
+.navbar-persistent--container #typesense-search .DocSearch-Button-Placeholder {
+  color: var(--pst-color-text-muted);
+}
+
+.navbar-persistent--container #typesense-search .DocSearch-Search-Icon {
+  color: var(--pst-color-text-muted);
+}
+
+/* PyData dark mode */
+html[data-theme="dark"] .navbar-persistent--container #typesense-search .DocSearch-Button {
+  background: var(--pst-color-background);
+  border-color: var(--pst-color-border);
+  color: var(--pst-color-text-base);
+}
+
+html[data-theme="dark"] .DocSearch {
+  --docsearch-text-color: var(--pst-color-text-base);
+  --docsearch-container-background: rgba(0, 0, 0, 0.7);
+  --docsearch-modal-background: var(--pst-color-background);
+  --docsearch-searchbox-background: var(--pst-color-surface);
+  --docsearch-hit-background: var(--pst-color-surface);
+  --docsearch-hit-color: var(--pst-color-text-base);
+  --docsearch-footer-background: var(--pst-color-background);
+}
+
+/* Shibuya Theme - Search box integration */
+/* Container is inserted into .sy-head-extra (in the header) */
+.sy-head-extra #typesense-search {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  order: -1;  /* Place before social icons */
+  margin-right: 0.5rem;
+}
+
+.sy-head-extra #typesense-search .DocSearch-Button {
+  width: 100%;
+  min-width: 180px;
+  height: 2rem;
+  border-radius: 0.375rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 0 0.5rem 0 0.75rem;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.sy-head-extra #typesense-search .DocSearch-Button:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.sy-head-extra #typesense-search .DocSearch-Button-Placeholder {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.sy-head-extra #typesense-search .DocSearch-Button-Keys {
+  min-width: auto;
+}
+
+.sy-head-extra #typesense-search .DocSearch-Search-Icon {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Shibuya light mode - when page is in light mode, header is still dark */
+html.light .sy-head-extra #typesense-search .DocSearch-Button {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+html.light .sy-head-extra #typesense-search .DocSearch-Button-Placeholder,
+html.light .sy-head-extra #typesense-search .DocSearch-Search-Icon {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Fallback: If search appears outside header in light area */
+#typesense-search .DocSearch-Button {
+  border: 1px solid #d1d5db;
+  background: #f9fafb;
+  color: #374151;
+}
+
+#typesense-search .DocSearch-Button:hover {
+  border-color: #9ca3af;
+  background: #f3f4f6;
+}
+
+#typesense-search .DocSearch-Button-Placeholder {
+  color: #6b7280;
+}
+
+#typesense-search .DocSearch-Search-Icon {
+  color: #6b7280;
+}
+
+/* Override fallback when inside header */
+.sy-head-extra #typesense-search .DocSearch-Button,
+.sy-head #typesense-search .DocSearch-Button {
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Shibuya Theme - Dark mode support */
+html.dark .DocSearch {
+  --docsearch-text-color: #e5e5e5;
+  --docsearch-container-background: rgba(0, 0, 0, 0.75);
+  --docsearch-modal-background: #171717;
+  --docsearch-searchbox-background: #262626;
+  --docsearch-searchbox-focus-background: #333333;
+  --docsearch-hit-background: #262626;
+  --docsearch-hit-color: #e5e5e5;
+  --docsearch-footer-background: #171717;
+  --docsearch-muted-color: #a3a3a3;
+  --docsearch-key-gradient: linear-gradient(-26.5deg, #333 0%, #262626 100%);
+  --docsearch-key-shadow: inset 0 -2px 0 0 #171717, inset 0 0 1px 1px #404040, 0 1px 2px 1px rgba(0, 0, 0, 0.3);
+}
+
+html.dark .searchbox #typesense-search .DocSearch-Button {
+  background-color: var(--sy-rc-bg, #262626);
+  border-color: var(--sy-rc-border, #404040);
+}
+
+html.dark .searchbox #typesense-search .DocSearch-Button:hover {
+  background-color: var(--sy-rc-bg-hover, #333333);
+}

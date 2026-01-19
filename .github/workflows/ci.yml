@@ -1,0 +1,195 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  FORCE_COLOR: "1"
+  UV_SYSTEM_PYTHON: "1"
+
+jobs:
+  # ============================================================================
+  # Security Checks
+  # ============================================================================
+  security:
+    name: Security
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Set up Python
+        run: uv python install 3.12
+
+      - name: Install dependencies
+        run: uv sync --group lint
+
+      - name: Run security linting (bandit via ruff)
+        uses: astral-sh/ruff-action@v3
+        with:
+          args: check --select S --output-format github
+
+      - name: Check for secrets with TruffleHog
+        uses: trufflesecurity/trufflehog@main
+        with:
+          extra_args: --only-verified
+
+  # ============================================================================
+  # Code Quality Validation
+  # ============================================================================
+  validate:
+    name: Validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Set up Python
+        run: uv python install 3.12
+
+      - name: Install dependencies
+        run: uv sync --group lint
+
+      - name: Ruff lint
+        uses: astral-sh/ruff-action@v3
+        with:
+          args: check --output-format github
+
+      - name: Ruff format check
+        uses: astral-sh/ruff-action@v3
+        with:
+          args: format --check
+
+      - name: Type check with mypy
+        run: uv run mypy src
+
+  # ============================================================================
+  # Smoke Tests (Fast Feedback)
+  # ============================================================================
+  test-smoke:
+    name: Smoke Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Set up Python
+        run: uv python install 3.12
+
+      - name: Install dependencies
+        run: uv sync --group test
+
+      - name: Run smoke tests (unit only)
+        run: uv run pytest tests/unit -v -m "not slow and not integration" --tb=short
+
+  # ============================================================================
+  # Full Test Matrix
+  # ============================================================================
+  test-full:
+    name: Tests (Python ${{ matrix.python-version }}, ${{ matrix.os }})
+    needs: [test-smoke]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+        include:
+          # Add macOS for one Python version to verify cross-platform compatibility
+          - os: macos-latest
+            python-version: "3.12"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Set up Python ${{ matrix.python-version }}
+        run: uv python install ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: uv sync --group test
+
+      - name: Run tests with coverage
+        run: |
+          uv run pytest tests \
+            --cov=src/sphinx_typesense \
+            --cov-report=xml \
+            --cov-report=term-missing \
+            -v
+
+      - name: Upload coverage to Codecov
+        if: matrix.python-version == '3.12' && matrix.os == 'ubuntu-latest'
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage.xml
+          fail_ci_if_error: false
+          verbose: true
+
+  # ============================================================================
+  # CI Success Gate (for branch protection)
+  # ============================================================================
+  ci-success:
+    name: CI Success
+    if: always()
+    needs: [security, validate, test-smoke, test-full]
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check all jobs passed
+        run: |
+          result_security="${{ needs.security.result }}"
+          result_validate="${{ needs.validate.result }}"
+          result_smoke="${{ needs.test-smoke.result }}"
+          result_full="${{ needs.test-full.result }}"
+
+          if [[ "$result_security" != "success" ]]; then
+            echo "::error::Security checks failed"
+            exit 1
+          fi
+          if [[ "$result_validate" != "success" ]]; then
+            echo "::error::Validation checks failed"
+            exit 1
+          fi
+          if [[ "$result_smoke" != "success" ]]; then
+            echo "::error::Smoke tests failed"
+            exit 1
+          fi
+          if [[ "$result_full" != "success" ]]; then
+            echo "::error::Full tests failed"
+            exit 1
+          fi
+          echo "::notice::All CI checks passed!"

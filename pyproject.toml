@@ -1,0 +1,161 @@
+[build-system]
+requires = ["uv_build>=0.9.18,<0.10.0"]
+build-backend = "uv_build"
+
+[project]
+name = "sphinx-typesense"
+version = "0.1.0"
+description = "A Sphinx extension for integrating Typesense search into documentation sites"
+readme = "README.md"
+license = "MIT"
+authors = [{ name = "JacobCoffee", email = "jacob@toocool.dev" }]
+maintainers = [{ name = "JacobCoffee", email = "jacob@toocool.dev" }]
+keywords = ["sphinx", "typesense", "search", "documentation", "docsearch"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Plugins",
+    "Framework :: Sphinx",
+    "Framework :: Sphinx :: Extension",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Documentation",
+    "Topic :: Documentation :: Sphinx",
+    "Topic :: Software Development :: Documentation",
+    "Typing :: Typed",
+]
+requires-python = ">=3.9"
+dependencies = ["sphinx>=7.0.0", "typesense>=0.21.0", "beautifulsoup4>=4.12.0"]
+
+[project.optional-dependencies]
+# Pagefind backend - bundles the pagefind binary (no Node.js required)
+pagefind = ["pagefind>=1.0.0"]
+# All optional backends
+all = ["pagefind>=1.0.0"]
+
+[project.urls]
+Homepage = "https://github.com/JacobCoffee/sphinx-typesense"
+Documentation = "https://sphinx-typesense.readthedocs.io"
+Repository = "https://github.com/JacobCoffee/sphinx-typesense"
+Issues = "https://github.com/JacobCoffee/sphinx-typesense/issues"
+Changelog = "https://github.com/JacobCoffee/sphinx-typesense/blob/main/CHANGELOG.md"
+
+[project.entry-points."sphinx.extension"]
+sphinx_typesense = "sphinx_typesense"
+
+[dependency-groups]
+docs = [
+    "sphinx>=7.0.0",
+    "shibuya>=2024.0.0",
+    "sphinx-autobuild>=2024.0.0",
+    "sphinx-copybutton>=0.5.0",
+    "sphinx-design>=0.5.0",
+]
+lint = ["ruff>=0.4.0", "mypy>=1.10.0", "pre-commit>=3.7.0"]
+test = [
+    "pytest>=8.0.0",
+    "pytest-cov>=5.0.0",
+    "pytest-xdist>=3.5.0",
+    "pytest-mock>=3.14.0",
+    "coverage[toml]>=7.5.0",
+    "pytest-sugar>=1.1.1",
+]
+examples = [
+    "sphinx_rtd_theme>=3.0.0",
+    "furo>=2024.0.0",
+    "pydata-sphinx-theme>=0.16.0",
+    "sphinx-book-theme>=1.1.0",
+    "litestar>=2.0.0",
+    "pydantic[email]>=2.0.0",
+]
+dev = [
+    { include-group = "docs" },
+    { include-group = "lint" },
+    { include-group = "test" },
+    { include-group = "examples" },
+]
+
+[tool.ruff]
+target-version = "py39"
+line-length = 120
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "ISC001",  # single-line-implicit-string-concatenation (conflicts with formatter)
+    "PLR0913", # too-many-arguments
+    "TRY003",  # raise-vanilla-args
+    "TD003",   # missing-todo-link (we use "Phase 2" markers)
+    "FIX002",  # line-contains-todo (intentional for stub code)
+    "ERA001",  # commented-out-code (intentional for Phase 2 templates)
+    "D100",    # undocumented-public-module (docs WIP)
+    "D104",    # undocumented-public-package (docs WIP)
+    "D203",    # one-blank-line-before-class (conflicts with D211)
+    "D213",    # multi-line-summary-second-line (conflicts with D212)
+    "COM812",  # trailing-comma-missing (conflicts with formatter)
+    "ANN401",  # any-type (needed for stub implementations)
+    "EM101",   # raw-string-in-exception (acceptable for stubs)
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*" = [
+    "S101",    # assert allowed in tests
+    "ARG",     # unused arguments in fixtures
+    "PLR2004", # magic values in tests
+]
+"docs/conf.py" = [
+    "INP001",  # implicit namespace package (standard for Sphinx conf.py)
+    "A001",    # builtin shadowing (copyright is standard Sphinx variable)
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["sphinx_typesense"]
+
+[tool.mypy]
+python_version = "3.9"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+show_error_codes = true
+pretty = true
+
+[[tool.mypy.overrides]]
+module = ["typesense.*", "bs4.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["sphinx.*"]
+follow_imports = "skip"
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = ["-ra", "-q", "--strict-markers", "--strict-config"]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+]
+
+[tool.coverage.run]
+source = ["src/sphinx_typesense"]
+branch = true
+parallel = true
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "if TYPE_CHECKING:",
+    "if __name__ == .__main__.:",
+    "raise NotImplementedError",
+    "\\.\\.\\.",
+]
+show_missing = true

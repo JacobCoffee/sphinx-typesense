@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sphinx-typesense Theme Showcase</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #0a0a0a;
+            color: #fafafa;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #333;
+            flex-shrink: 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .logo h1 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .theme-switcher {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .theme-switcher label {
+            font-size: 0.875rem;
+            color: #a0a0a0;
+        }
+
+        .theme-buttons {
+            display: flex;
+            gap: 0.25rem;
+            background: #1a1a1a;
+            padding: 0.25rem;
+            border-radius: 0.5rem;
+            border: 1px solid #333;
+        }
+
+        .theme-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            background: transparent;
+            color: #a0a0a0;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 0.375rem;
+            transition: all 0.2s ease;
+        }
+
+        .theme-btn:hover {
+            background: #2a2a2a;
+            color: #fafafa;
+        }
+
+        .theme-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+        }
+
+        .theme-btn[data-theme="rtd"].active {
+            background: linear-gradient(135deg, #2980b9 0%, #1abc9c 100%);
+        }
+
+        .theme-btn[data-theme="furo"].active {
+            background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+        }
+
+        .theme-btn[data-theme="alabaster"].active {
+            background: linear-gradient(135deg, #7f8c8d 0%, #95a5a6 100%);
+        }
+
+        .theme-btn[data-theme="pydata"].active {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        }
+
+        .theme-btn[data-theme="shibuya"].active {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+        }
+
+        .info-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 0.5rem;
+            font-size: 0.75rem;
+            color: #a0a0a0;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .info-badge:hover {
+            background: #2a2a2a;
+            border-color: #667eea;
+            color: #e0e0e0;
+        }
+
+        .info-badge kbd {
+            background: #333;
+            padding: 0.125rem 0.375rem;
+            border-radius: 0.25rem;
+            font-family: monospace;
+            font-size: 0.75rem;
+        }
+
+        .iframe-container {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #fff;
+        }
+
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            color: #666;
+        }
+
+        .loading.hidden {
+            display: none;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #333;
+            border-top-color: #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .footer {
+            background: #111;
+            padding: 0.75rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid #333;
+            font-size: 0.75rem;
+            color: #666;
+            flex-shrink: 0;
+        }
+
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .search-hint {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .search-hint kbd {
+            background: #222;
+            border: 1px solid #444;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="m21 21-4.35-4.35"/>
+            </svg>
+            <h1>sphinx-typesense</h1>
+        </div>
+
+        <div class="theme-switcher">
+            <label>Theme:</label>
+            <div class="theme-buttons">
+                <button class="theme-btn active" data-theme="shibuya">Shibuya</button>
+                <button class="theme-btn" data-theme="furo">Furo</button>
+                <button class="theme-btn" data-theme="rtd">RTD</button>
+                <button class="theme-btn" data-theme="pydata">PyData</button>
+                <button class="theme-btn" data-theme="alabaster">Alabaster</button>
+            </div>
+        </div>
+
+        <div class="info-badge" id="search-trigger" title="Click to search">
+            <span>Press</span>
+            <kbd id="mod-key">Ctrl</kbd>+<kbd>K</kbd>
+            <span>to search</span>
+        </div>
+    </header>
+
+    <main class="iframe-container">
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <span>Loading theme...</span>
+        </div>
+        <iframe id="theme-frame" src="docs-shibuya/_build/html/index.html"></iframe>
+    </main>
+
+    <footer class="footer">
+        <div>
+            <a href="https://github.com/JacobCoffee/sphinx-typesense" target="_blank">GitHub</a>
+            &nbsp;|&nbsp;
+            <a href="https://pypi.org/project/sphinx-typesense/" target="_blank">PyPI</a>
+        </div>
+        <div class="search-hint">
+            Try searching for: <kbd>API</kbd> <kbd>user</kbd> <kbd>health</kbd> <kbd>item</kbd>
+        </div>
+    </footer>
+
+    <script>
+        const frame = document.getElementById('theme-frame');
+        const loading = document.getElementById('loading');
+        const buttons = document.querySelectorAll('.theme-btn');
+
+        const themePaths = {
+            'rtd': 'docs-rtd/_build/html/index.html',
+            'furo': 'docs-furo/_build/html/index.html',
+            'alabaster': 'docs-alabaster/_build/html/index.html',
+            'pydata': 'docs-pydata/_build/html/index.html',
+            'shibuya': 'docs-shibuya/_build/html/index.html'
+        };
+
+        function switchTheme(theme) {
+            // Update active button
+            buttons.forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`[data-theme="${theme}"]`).classList.add('active');
+
+            // Show loading
+            loading.classList.remove('hidden');
+
+            // Switch iframe source
+            frame.src = themePaths[theme];
+        }
+
+        // Handle iframe load
+        frame.addEventListener('load', () => {
+            loading.classList.add('hidden');
+        });
+
+        // Button click handlers
+        buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                switchTheme(btn.dataset.theme);
+            });
+        });
+
+        // Keyboard shortcuts (1-5 for themes)
+        document.addEventListener('keydown', (e) => {
+            if (e.target.tagName === 'INPUT') return;
+
+            const themeKeys = {
+                '1': 'shibuya',
+                '2': 'furo',
+                '3': 'rtd',
+                '4': 'pydata',
+                '5': 'alabaster'
+            };
+
+            if (themeKeys[e.key]) {
+                switchTheme(themeKeys[e.key]);
+            }
+        });
+
+        // Detect Mac and update modifier key display
+        const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+        if (isMac) {
+            document.getElementById('mod-key').textContent = '⌘';
+        }
+
+        // Search trigger - click or keyboard shortcut
+        const searchTrigger = document.getElementById('search-trigger');
+
+        function triggerSearch() {
+            try {
+                // Try to trigger Cmd/Ctrl+K in the iframe
+                const iframeDoc = frame.contentDocument || frame.contentWindow.document;
+                const event = new KeyboardEvent('keydown', {
+                    key: 'k',
+                    code: 'KeyK',
+                    ctrlKey: !isMac,
+                    metaKey: isMac,
+                    bubbles: true
+                });
+                iframeDoc.dispatchEvent(event);
+            } catch (e) {
+                // Cross-origin restriction - just focus the iframe
+                frame.focus();
+                alert('Press ' + (isMac ? '⌘' : 'Ctrl') + '+K inside the documentation to search');
+            }
+        }
+
+        searchTrigger.addEventListener('click', triggerSearch);
+    </script>
+</body>
+</html>

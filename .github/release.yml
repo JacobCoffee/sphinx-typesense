@@ -1,0 +1,58 @@
+# GitHub Release configuration for auto-generated release notes
+# https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes
+
+changelog:
+  exclude:
+    labels:
+      - "skip-changelog"
+      - "duplicate"
+      - "invalid"
+      - "wontfix"
+    authors:
+      - "dependabot"
+      - "dependabot[bot]"
+      - "github-actions"
+      - "github-actions[bot]"
+
+  categories:
+    - title: "Breaking Changes"
+      labels:
+        - "breaking"
+        - "breaking-change"
+
+    - title: "Features"
+      labels:
+        - "enhancement"
+        - "feature"
+        - "feat"
+
+    - title: "Bug Fixes"
+      labels:
+        - "bug"
+        - "bugfix"
+        - "fix"
+
+    - title: "Documentation"
+      labels:
+        - "documentation"
+        - "docs"
+
+    - title: "Performance"
+      labels:
+        - "performance"
+        - "perf"
+
+    - title: "Dependencies"
+      labels:
+        - "dependencies"
+        - "deps"
+
+    - title: "Maintenance"
+      labels:
+        - "chore"
+        - "maintenance"
+        - "refactor"
+
+    - title: "Other Changes"
+      labels:
+        - "*"

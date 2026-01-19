@@ -1,0 +1,113 @@
+# Pre-commit configuration for sphinx-typesense
+# Compatible with both pre-commit and prek
+# https://pre-commit.com / https://github.com/prek-sh/prek
+
+default_install_hook_types: [pre-commit, commit-msg]
+default_language_version:
+  python: python3.9
+
+ci:
+  autoupdate_schedule: monthly
+  skip: [mypy]  # mypy requires installed dependencies
+
+repos:
+  # =============================================================================
+  # Standard pre-commit hooks
+  # =============================================================================
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
+      - id: end-of-file-fixer
+      - id: check-yaml
+        args: [--unsafe]  # Allow custom YAML tags
+      - id: check-toml
+      - id: check-added-large-files
+        args: [--maxkb=1000]
+      - id: mixed-line-ending
+        args: [--fix=lf]
+      - id: check-merge-conflict
+      - id: check-case-conflict
+      - id: detect-private-key
+
+  # =============================================================================
+  # Ruff - Fast Python linter and formatter
+  # =============================================================================
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.8.6
+    hooks:
+      # Linting with auto-fix
+      - id: ruff
+        args: [--fix, --exit-non-zero-on-fix]
+        types_or: [python, pyi]
+      # Formatting
+      - id: ruff-format
+        types_or: [python, pyi]
+
+  # =============================================================================
+  # Codespell - Spell checker for code
+  # =============================================================================
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.3.0
+    hooks:
+      - id: codespell
+        args:
+          - --skip=*.lock,*.json,*.min.js,*.min.css,.git,__pycache__,*.egg-info,build,dist,venv,.venv,node_modules,.mypy_cache,.pytest_cache,.ruff_cache
+          - --ignore-words-list=crate,nd,ot
+        types_or: [python, rst, markdown, yaml, toml]
+
+  # =============================================================================
+  # Type checking - mypy (ty is not yet widely available as pre-commit hook)
+  # =============================================================================
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.14.1
+    hooks:
+      - id: mypy
+        args:
+          - --python-version=3.9
+          - --strict
+          - --show-error-codes
+          - --pretty
+        additional_dependencies:
+          - sphinx>=7.0.0
+          - typesense>=0.21.0
+          - beautifulsoup4>=4.12.0
+          - types-beautifulsoup4
+        pass_filenames: false
+        files: ^src/
+
+  # =============================================================================
+  # Sphinx-lint - Lint reStructuredText files
+  # =============================================================================
+  - repo: https://github.com/sphinx-contrib/sphinx-lint
+    rev: v1.0.0
+    hooks:
+      - id: sphinx-lint
+        args: [--enable=all]
+        types: [rst]
+
+  # =============================================================================
+  # Additional quality hooks
+  # =============================================================================
+  - repo: https://github.com/python-jsonschema/check-jsonschema
+    rev: 0.30.0
+    hooks:
+      - id: check-github-workflows
+        files: ^\.github/workflows/
+
+  - repo: https://github.com/rhysd/actionlint
+    rev: v1.7.7
+    hooks:
+      - id: actionlint
+        files: ^\.github/workflows/
+
+  # =============================================================================
+  # Security scanning
+  # =============================================================================
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.5.0
+    hooks:
+      - id: detect-secrets
+        args: [--baseline, .secrets.baseline]
+        exclude: .*\.lock$
