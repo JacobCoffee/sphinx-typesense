@@ -151,7 +151,6 @@ class ItemCreate(ItemBase):
     """
 
 
-
 class ItemResponse(ItemBase):
     """Model for item API responses.
 

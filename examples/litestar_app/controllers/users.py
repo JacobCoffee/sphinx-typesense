@@ -44,15 +44,9 @@ class UserController(Controller):
     async def list_users(
         self,
         page: Annotated[int, Parameter(ge=1, description="Page number")] = 1,
-        page_size: Annotated[
-            int, Parameter(ge=1, le=100, description="Items per page")
-        ] = 20,
-        role: Annotated[
-            UserRole | None, Parameter(description="Filter by role")
-        ] = None,
-        is_active: Annotated[
-            bool | None, Parameter(description="Filter by active status")
-        ] = None,
+        page_size: Annotated[int, Parameter(ge=1, le=100, description="Items per page")] = 20,
+        role: Annotated[UserRole | None, Parameter(description="Filter by role")] = None,
+        is_active: Annotated[bool | None, Parameter(description="Filter by active status")] = None,
     ) -> PaginatedResponse:
         """List all users with pagination and filtering.
 

@@ -108,7 +108,7 @@ jobs:
         run: uv sync --group test
 
       - name: Run smoke tests (unit only)
-        run: uv run pytest tests/unit -v -m "not slow and not integration" --tb=short
+        run: uv run pytest tests -v -m "not slow and not integration" --tb=short
 
   # ============================================================================
   # Full Test Matrix

@@ -44,21 +44,11 @@ class ItemController(Controller):
     async def list_items(
         self,
         page: Annotated[int, Parameter(ge=1, description="Page number")] = 1,
-        page_size: Annotated[
-            int, Parameter(ge=1, le=100, description="Items per page")
-        ] = 20,
-        status: Annotated[
-            ItemStatus | None, Parameter(description="Filter by status")
-        ] = None,
-        min_price: Annotated[
-            int | None, Parameter(ge=0, description="Minimum price in cents")
-        ] = None,
-        max_price: Annotated[
-            int | None, Parameter(ge=0, description="Maximum price in cents")
-        ] = None,
-        in_stock: Annotated[
-            bool | None, Parameter(description="Filter items in stock")
-        ] = None,
+        page_size: Annotated[int, Parameter(ge=1, le=100, description="Items per page")] = 20,
+        status: Annotated[ItemStatus | None, Parameter(description="Filter by status")] = None,
+        min_price: Annotated[int | None, Parameter(ge=0, description="Minimum price in cents")] = None,
+        max_price: Annotated[int | None, Parameter(ge=0, description="Maximum price in cents")] = None,
+        in_stock: Annotated[bool | None, Parameter(description="Filter items in stock")] = None,
     ) -> PaginatedResponse:
         """List all items with pagination and filtering.
 
