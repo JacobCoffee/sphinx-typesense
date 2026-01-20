@@ -31,6 +31,9 @@ extensions = [
 templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
+# Suppress duplicate object warnings from autosummary + manual docs
+suppress_warnings = ["autodoc.duplicate_object"]
+
 # -- Options for HTML output -------------------------------------------------
 html_theme = "shibuya"
 html_static_path = ["_static"]
