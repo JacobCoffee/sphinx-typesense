@@ -4,10 +4,6 @@ Search Backends
 sphinx-typesense supports two search backends, giving you flexibility to choose
 the right solution for your deployment environment.
 
-.. contents:: On this page
-   :local:
-   :depth: 2
-
 Overview
 --------
 
