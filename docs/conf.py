@@ -31,9 +31,6 @@ extensions = [
 templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
-# Suppress duplicate object warnings from autosummary + manual docs
-suppress_warnings = ["ref.python"]
-
 # -- Options for HTML output -------------------------------------------------
 html_theme = "shibuya"
 html_static_path = ["_static"]
@@ -75,8 +72,8 @@ autodoc_typehints = "description"
 autodoc_typehints_description_target = "documented"
 autodoc_class_signature = "separated"
 
-# Autosummary settings
-autosummary_generate = True
+# Autosummary settings - disabled to avoid duplicate entries with manual API docs
+autosummary_generate = False
 
 # Intersphinx mapping
 intersphinx_mapping = {

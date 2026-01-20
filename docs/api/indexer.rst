@@ -12,6 +12,7 @@ Module Contents
    :members:
    :undoc-members:
    :show-inheritance:
+   :exclude-members: TypesenseIndexer
 
 TypesenseIndexer Usage
 ~~~~~~~~~~~~~~~~~~~~~~

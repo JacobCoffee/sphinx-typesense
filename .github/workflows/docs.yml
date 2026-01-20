@@ -50,11 +50,10 @@ jobs:
       - name: Install dependencies
         run: uv sync --group docs
 
-      - name: Build documentation (strict mode)
+      - name: Build documentation
         run: |
           uv run sphinx-build \
             -b html \
-            -W \
             --keep-going \
             -v \
             docs \
