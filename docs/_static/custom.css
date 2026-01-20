@@ -42,3 +42,9 @@ code.literal {
 .toctree-wrapper .toctree-l1 > a {
     font-weight: 500;
 }
+
+/* Hide "On this page" right sidebar TOC */
+.article-container aside.toc-drawer,
+.toc-drawer {
+    display: none;
+}
