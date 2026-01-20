@@ -37,6 +37,7 @@ html_static_path = ["_static"]
 html_css_files = ["custom.css"]
 
 html_theme_options = {
+    "accent_color": "orange",
     "github_url": "https://github.com/JacobCoffee/sphinx-typesense",
     "nav_links": [
         {"title": "Getting Started", "url": "getting-started/index"},
